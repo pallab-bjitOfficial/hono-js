@@ -1,7 +1,9 @@
 {
   "name": "hono-js",
-  "type": "module",
+  "type": "commonjs",
   "scripts": {
+    "start": "node dist/index.js",
+    "build": "tsc",
     "dev": "tsx watch src/index.ts"
   },
   "dependencies": {

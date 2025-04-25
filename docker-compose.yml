@@ -1,0 +1,19 @@
+version: "3.8"
+
+services:
+  database:
+    image: mongo:latest
+    container_name: mongodb
+    ports:
+      - "27017:27017"
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: app
+    ports:
+      - "3000:3000"
+    depends_on:
+      - database
+    env_file:
+      - .env.example

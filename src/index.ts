@@ -15,8 +15,9 @@ serve(
   {
     fetch: app.fetch,
     port: PORT,
+    hostname: "0.0.0.0",
   },
-  () => {
-    console.log("Server is running.");
+  (info) => {
+    console.log(`Server is running.`);
   }
 );
