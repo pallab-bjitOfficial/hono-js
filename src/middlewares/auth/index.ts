@@ -14,7 +14,6 @@ export const authMiddleware = createMiddleware(
         });
       }
       const isValidToken = await verify(token, env.JWT_SECRET);
-      console.log(isValidToken);
       if (!isValidToken) {
         throw new HTTPException(401, {
           message: "Unauthorized",

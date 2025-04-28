@@ -7,17 +7,14 @@ import app from "./app";
 config();
 const PORT = env.PORT;
 
-(async () => {
-  await connectToDatabase();
-})();
-
 serve(
   {
     fetch: app.fetch,
     port: PORT,
     hostname: "0.0.0.0",
   },
-  (info) => {
+  async () => {
     console.log(`Server is running.`);
+    await connectToDatabase();
   }
 );

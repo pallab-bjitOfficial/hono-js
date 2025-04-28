@@ -1,4 +1,4 @@
-import Post from "../../models";
+import Post from "../../models/posts";
 
 class PostRepositoryClass {
   async getAllPostsByUser(userId: string) {

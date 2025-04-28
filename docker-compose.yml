@@ -6,14 +6,20 @@ services:
     container_name: mongodb
     ports:
       - "27017:27017"
-  app:
+    volumes:
+      - mongodb_data:/data/db
+    restart: on-failure
+
+  node_app:
     build:
       context: .
       dockerfile: Dockerfile
-    container_name: app
+    container_name: node_app
     ports:
       - "3000:3000"
+    restart: on-failure
     depends_on:
       - database
-    env_file:
-      - .env.example
+
+volumes:
+  mongodb_data:
