@@ -1,10 +1,10 @@
 import { Schema } from "mongoose";
 
 export interface IPost {
-  title: string;
-  content: string;
-  user: Schema.Types.ObjectId;
-  createdAt: Date;
-  updatedAt: Date;
-  tags: string[];
+    content: string;
+    createdAt: Date;
+    tags: string[];
+    title: string;
+    updatedAt: Date;
+    user: Schema.Types.ObjectId;
 }

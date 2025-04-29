@@ -1,11 +1,11 @@
 export interface IError {
-  description?: string;
-  errors?: any;
-  status?: number;
-  isOperational?: boolean;
-  name?: string;
-  message?: string;
-  stack?: string;
-  code?: string;
-  cause?: any;
+    cause?: any;
+    code?: string;
+    description?: string;
+    errors?: any;
+    isOperational?: boolean;
+    message?: string;
+    name?: string;
+    stack?: string;
+    status?: number;
 }
