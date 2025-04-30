@@ -1,39 +1,38 @@
 name: Build
 
 on:
-  push:
-    branches:
-      - master # Trigger the workflow on pushes to the "main" branch
-  pull_request:
-    branches:
-      - master # Trigger the workflow on pull requests targeting the "main" branch
+    push:
+        branches:
+            - master # Trigger the workflow on pushes to the "main" branch
+    pull_request:
+        branches:
+            - master # Trigger the workflow on pull requests targeting the "main" branch
 
 jobs:
-  build-and-lint:
-    name: Build and Lint Application
-    runs-on: ubuntu-latest # Use the latest Ubuntu runner
-    
-    steps:
-      # Step 1: Checkout the code from the repository
-      - name: Checkout Code
-        uses: actions/checkout@v3
+    build:
+        name: Build the Application
+        runs-on: ubuntu-latest # Use the latest Ubuntu runner
 
-      # Step 2: Set up Node.js
-      - name: Set up Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: '22.15.0' # Match the Node.js version in your Dockerfile
-          cache: 'npm' # Cache npm packages to speed up builds
+        steps:
+            # Step 1: Checkout the code from the repository
+            - name: Checkout Code
+              uses: actions/checkout@v3
 
-      # Step 3: Install Dependencies
-      - name: Install Dependencies
-        run: npm install
+            # Step 2: Set up Node.js
+            - name: Set up Node.js
+              uses: actions/setup-node@v3
+              with:
+                  node-version: "22.15.0" # Match the Node.js version in your Dockerfile
+                  cache: "npm" # Cache npm packages to speed up builds
 
-      # Step 5: Build the Application
-      - name: Build Application
-        run: npm run build
+            # Step 3: Install Dependencies
+            - name: Install Dependencies
+              run: npm install
 
-      # Step 6: Ensure .env.example exists (Optional Validation)
-      - name: Validate Environment File
-        run: test -f .env.example
+            # Step 5: Build the Application
+            - name: Build Application
+              run: npm run build
 
+            # Step 6: Ensure .env.example exists (Optional Validation)
+            - name: Validate Environment File
+              run: test -f .env.example
