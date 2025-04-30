@@ -1,13 +1,13 @@
 import { Hono } from "hono";
 import { compress } from "hono/compress";
 import { cors } from "hono/cors";
-import { showRoutes } from "hono/dev";
 import { logger } from "hono/logger";
 import { secureHeaders } from "hono/secure-headers";
 import { ContentfulStatusCode } from "hono/utils/http-status";
 
 import { errorHandler } from "./middlewares/errorHandler";
 import authRoute from "./routes/auth";
+import commentRoute from "./routes/comment";
 import postRoute from "./routes/post";
 
 const app = new Hono().basePath("/api/v1");
@@ -19,6 +19,7 @@ app.use(compress());
 
 app.route("/auth/", authRoute);
 app.route("/posts/", postRoute);
+app.route("/comments/", commentRoute);
 
 app.onError(errorHandler);
 
@@ -30,10 +31,6 @@ app.notFound((c) => {
         },
         404 as ContentfulStatusCode
     );
-});
-showRoutes(app, {
-    colorize: true,
-    verbose: true,
 });
 
 export default app;

@@ -30,9 +30,8 @@ class PostControllerClass {
     }
     async getPostById(c: Context) {
         try {
-            const user = c.get("user");
             const postId = c.req.param("id");
-            const post = await PostService.getPostById(user.id, postId);
+            const post = await PostService.getPostById(postId);
             return c.json({
                 data: post,
                 message: "Post fetched successfully",

@@ -13,10 +13,8 @@ class PostRepositoryClass {
     async getAllPostsByUser(userId: string) {
         return await Post.find({ user: userId }).populate("user");
     }
-    async getPostById(userId: string, postId: string) {
-        return await Post.findOne({ _id: postId, user: userId }).populate(
-            "user"
-        );
+    async getPostById(postId: string) {
+        return await Post.findOne({ _id: postId }).populate("user");
     }
     async updatePost(userId: string, postId: string, data: any) {
         return await Post.findOneAndUpdate(

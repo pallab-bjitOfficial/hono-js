@@ -8,7 +8,7 @@ class PostServiceClass {
     }
 
     async deletePost(userId: string, postId: string) {
-        const post = await PostRepository.getPostById(userId, postId);
+        const post = await PostRepository.getPostById(userId);
         if (!post) {
             throw new HTTPException(404, {
                 message: "Post not found",
@@ -22,8 +22,8 @@ class PostServiceClass {
         }
         return deletedPost;
     }
-    async getPostById(userId: string, postId: string) {
-        const post = await PostRepository.getPostById(userId, postId);
+    async getPostById(postId: string) {
+        const post = await PostRepository.getPostById(postId);
         if (!post) {
             throw new HTTPException(404, {
                 message: "Post not found",
@@ -36,7 +36,7 @@ class PostServiceClass {
     }
 
     async updatePost(userId: string, postId: string, data: any) {
-        const post = await PostRepository.getPostById(userId, postId);
+        const post = await PostRepository.getPostById(postId);
         if (!post) {
             throw new HTTPException(404, {
                 message: "Post not found",
