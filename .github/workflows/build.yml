@@ -1,0 +1,50 @@
+name: Build
+
+on:
+  push:
+    branches:
+      - main # Trigger the workflow on pushes to the "main" branch
+  pull_request:
+    branches:
+      - main # Trigger the workflow on pull requests targeting the "main" branch
+
+jobs:
+  build-and-lint:
+    name: Build and Lint Application
+    runs-on: ubuntu-latest # Use the latest Ubuntu runner
+    
+    steps:
+      # Step 1: Checkout the code from the repository
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      # Step 2: Set up Node.js
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '22.15.0' # Match the Node.js version in your Dockerfile
+          cache: 'npm' # Cache npm packages to speed up builds
+
+      # Step 3: Install Dependencies
+      - name: Install Dependencies
+        run: npm install
+
+      # Step 5: Build the Application
+      - name: Build Application
+        run: npm run build
+
+      # Step 6: Run Tests (Optional)
+      - name: Run Tests
+        run: npm test
+
+      # Step 7: Ensure .env.example exists (Optional Validation)
+      - name: Validate Environment File
+        run: test -f .env.example
+
+      # Step 8: Optional - Archive Build Artifacts (Helpful for Debugging)
+      - name: Upload Build Artifacts
+        if: failure()
+        uses: actions/upload-artifact@v3
+        with:
+          name: build-logs
+          path: ./dist
