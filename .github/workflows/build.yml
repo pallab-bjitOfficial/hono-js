@@ -44,7 +44,7 @@ jobs:
       # Step 8: Optional - Archive Build Artifacts (Helpful for Debugging)
       - name: Upload Build Artifacts
         if: failure()
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v3.1.2 # Specify the correct version
         with:
           name: build-logs
           path: ./dist
