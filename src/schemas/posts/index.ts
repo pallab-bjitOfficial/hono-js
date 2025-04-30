@@ -11,7 +11,7 @@ export const postByIdSchema = z.string().superRefine((val, ctx) => {
     if (!isValidObjectId(val)) {
         ctx.addIssue({
             code: z.ZodIssueCode.custom,
-            message: "Invalid post ID",
+            message: "Invalid mongo ID",
         });
         return true;
     }
