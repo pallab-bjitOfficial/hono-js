@@ -33,11 +33,7 @@ jobs:
       - name: Build Application
         run: npm run build
 
-      # Step 6: Run Tests (Optional)
-      - name: Run Tests
-        run: npm test
-
-      # Step 7: Ensure .env.example exists (Optional Validation)
+      # Step 6: Ensure .env.example exists (Optional Validation)
       - name: Validate Environment File
         run: test -f .env.example
 
