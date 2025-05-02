@@ -4,7 +4,10 @@ import { every } from "hono/combine";
 import CommentController from "../../controllers/comment";
 import { authMiddleware } from "../../middlewares/auth";
 import { mongoIdSchema } from "../../schemas";
-import { createCommentSchema } from "../../schemas/comment";
+import {
+    createCommentSchema,
+    reactToCommentSchema,
+} from "../../schemas/comment";
 import { validateParams } from "../../utils/validateParams";
 import { zValidatorWrapper } from "../../utils/zValidatorWrapper";
 
@@ -48,5 +51,14 @@ commentRoute
         "/:id",
         every(authMiddleware, validateParams(mongoIdSchema)),
         CommentController.deleteComment
+    )
+    .post(
+        "/reaction/:id",
+        every(
+            authMiddleware,
+            validateParams(mongoIdSchema),
+            zValidatorWrapper("json", reactToCommentSchema)
+        ),
+        CommentController.reactToComment
     );
 export default commentRoute;

@@ -4,6 +4,28 @@ import { IComment } from "../../types/comment";
 
 const commentSchema = new Schema<IComment>(
     {
+        dislikes: [
+            {
+                user: {
+                    ref: "Auth",
+                    required: true,
+                    type: Schema.Types.ObjectId,
+                },
+            },
+        ],
+        isDeleted: {
+            default: false,
+            type: Boolean,
+        },
+        likes: [
+            {
+                user: {
+                    ref: "Auth",
+                    required: true,
+                    type: Schema.Types.ObjectId,
+                },
+            },
+        ],
         parent: {
             ref: "Comment",
             required: false,
@@ -14,18 +36,14 @@ const commentSchema = new Schema<IComment>(
             required: true,
             type: Schema.Types.ObjectId,
         },
-        user: {
-            ref: "Auth",
-            required: true,
-            type: Schema.Types.ObjectId,
-        },
         text: {
             required: true,
             type: String,
         },
-        isDeleted: {
-            default: false,
-            type: Boolean,
+        user: {
+            ref: "Auth",
+            required: true,
+            type: Schema.Types.ObjectId,
         },
     },
     { timestamps: true }

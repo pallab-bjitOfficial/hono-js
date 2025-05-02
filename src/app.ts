@@ -15,7 +15,7 @@ const app = new Hono().basePath("/api/v1");
 app.use(logger());
 app.use(cors());
 app.use(secureHeaders());
-app.use(compress());
+app.use(compress({ encoding: "deflate" }));
 
 app.route("/auth/", authRoute);
 app.route("/posts/", postRoute);

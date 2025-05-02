@@ -20,7 +20,13 @@ export interface IAllCommentResponse {
 
 export interface IComment {
     createdAt: Date;
+    dislikes: {
+        user: Schema.Types.ObjectId;
+    }[];
     isDeleted?: boolean;
+    likes: {
+        user: Schema.Types.ObjectId;
+    }[];
     parent: Schema.Types.ObjectId;
     post: Schema.Types.ObjectId;
     text: string;

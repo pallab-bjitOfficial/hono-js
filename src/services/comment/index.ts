@@ -1,5 +1,6 @@
 import { HTTPException } from "hono/http-exception";
 
+import { Reaction } from "../../constant";
 import CommentRepository from "../../repository/comment";
 import { IAddComment, IComment } from "../../types/comment";
 import { structureComments } from "../../utils";
@@ -33,6 +34,25 @@ class CommentServiceClass {
     async getCommentsByPostId(postId: string) {
         const comments = await CommentRepository.getCommentsByPostId(postId);
         return structureComments(comments);
+    }
+    async reactToComment(
+        userId: string,
+        commentId: string,
+        data: { reaction: Reaction }
+    ) {
+        const { reaction } = data;
+        const comment = await this.getCommentById(commentId);
+        if (!comment) {
+            throw new HTTPException(404, {
+                message: "Comment not found",
+            });
+        }
+
+        return await CommentRepository.reactToComment(
+            userId,
+            commentId,
+            reaction
+        );
     }
     async updateComment(
         userId: string,

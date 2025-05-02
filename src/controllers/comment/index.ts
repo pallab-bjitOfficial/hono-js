@@ -77,6 +77,26 @@ class CommentControllerClass {
         }
     }
 
+    async reactToComment(c: Context) {
+        try {
+            const user = c.get("user");
+            const commentId = c.req.param("id");
+            const data = c.req.valid("json" as never);
+            const comment = await CommentService.reactToComment(
+                user.id,
+                commentId,
+                data
+            );
+            return c.json({
+                data: comment,
+                message: "Comment reacted successfully",
+                status: 200,
+            });
+        } catch (error) {
+            throw error;
+        }
+    }
+
     async updateComment(c: Context) {
         try {
             const user = c.get("user");

@@ -6,3 +6,8 @@ export const ErrorName = {
     NOT_FOUND: "NOT FOUND",
     UNAUTHORIZED: "UNAUTHORIZED",
 };
+
+export enum Reaction {
+    DISLIKE = "dislike",
+    LIKE = "like",
+}
